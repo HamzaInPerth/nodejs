@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 
-// Load DOTENV PATH
+// DOTENV PATH
 dotenv.config({
   path: "./config/config.env",
 });
@@ -13,10 +13,11 @@ connectDB();
 // Routes file
 const dmlog = require("./routes/dmlog.js");
 const app = express();
+// Json parser
+app.use(express.json());
+
 app.use("/", dmlog);
 
-const PORT = 5000;
-
-app.listen(PORT, () => {
-  console.log(PORT);
+app.listen(process.env.PORT, () => {
+  console.log(`${process.env.CONNECTED} ${process.env.PORT}`);
 });
